@@ -8,11 +8,15 @@
  */
 #define DICE_PIN_1    // Driver door signal
 #define DICE_PIN_7    // Key is out
+#define DICE_PIN_19   // Rear window wiper
+#define DICE_PIN_27   // Front window wiper
 #define DICE_PIN_41   // Close light 
 
 typedef enum {
   FOLLOW_ME_HOME,
   AUTOINTERVAL_REARWINDOW,
+  BLINK_RIGHT,
+  BLINK_LEFT,
   NONE
 } states;
 
@@ -38,9 +42,10 @@ void loop() {
     // This can be reprogrammed with the TECH2 SAAB tool.
       pinMode(DICE_PIN_41, OUTPUT);
       digitalWrite(DICE_PIN_41, HIGH);
-      delay(10); // Wait 10 ms before going low
+      delay(1); // Wait 1 ms before going low
       digitalWrite(DICE_PIN_41, LOW);
       pinMode(DICE_PIN_41, INPUT);
+      state = NONE;
     break; 
   }
 
