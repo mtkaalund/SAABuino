@@ -1,16 +1,15 @@
 
 /*
- *  follow me home light
-  virker ved at aktiverer langt lys imens fører døren er åben og nøglen er taget ud af tændingen, opgave, indgang på SAABuino,
-  signal fra tændingslås nøgle ude, B+ ben 7 i DICE (TWICE ben 17) når fører døren åbnes kommer der + på ben 1 i DICE puls 
-  udgang til DICE ben 41 tænder nærlys når døren lukkes igen program beskrivelse: B+ DICE ben 7 forsvinder når nøglen tages 
-  ud & + fra DICE ben 1 ind på SAABuino i den rækkefølge skal give en puls ud til DICE ben 41
+This project is build on https://hackaday.io/project/158595/gallery#c95bac70f561ae865c572f3897c6257d
+The idea is to add some more functionalty to our beloved SAABs.
+
+As the original project have implmented blink 3 times, 
  */
-#define DICE_PIN_1    // Driver door signal
-#define DICE_PIN_7    // Key is out
-#define DICE_PIN_19   // Rear window wiper
-#define DICE_PIN_27   // Front window wiper
-#define DICE_PIN_41   // Close light 
+#define DICE_PIN_1    4 // Driver door signal
+#define DICE_PIN_7    5 // Key is out
+#define DICE_PIN_19   6 // Rear window wiper
+#define DICE_PIN_27   7 // Front window wiper
+#define DICE_PIN_41   8 // Close light 
 
 typedef enum {
   FOLLOW_ME_HOME,
@@ -50,6 +49,15 @@ void loop() {
       state = old_state;
       old_state = NONE;
     break; 
+    
+    case AUTOINTERVAL_REARWINDOW:
+    break;
+
+    case BLINK_RIGHT:
+    break;
+
+    case BLINK_LEFT:
+    break;
   }
 
   delay(200); // This is code is run every 200 ms
