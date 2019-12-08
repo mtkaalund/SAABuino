@@ -20,11 +20,12 @@ typedef enum {
   NONE
 } states;
 
-volatile states state;
+volatile states state, old_state;
 
 void setup() {
   // put your setup code here, to run once:
   state = NONE;
+  old_state = NONE;
   pinMode(DICE_PIN_1, INPUT);
   pinMode(DICE_PIN_7, INPUT);
 }
@@ -32,6 +33,7 @@ void setup() {
 void loop() {
   if( digitalRead(DICE_PIN_1) && !digitalRead(DICE_PIN_7) ) {
     // Change state to follow me home light
+    old_state = state;
     state = FOLLOW_ME_HOME;
   }
 
@@ -45,7 +47,8 @@ void loop() {
       delay(1); // Wait 1 ms before going low
       digitalWrite(DICE_PIN_41, LOW);
       pinMode(DICE_PIN_41, INPUT);
-      state = NONE;
+      state = old_state;
+      old_state = NONE;
     break; 
   }
 
