@@ -8,11 +8,16 @@ in this project there are going to be implemnted
 
 * Follow Me Home Light
 * Autointerval rear window
+* Blink 3 times for lane change
 
 
 Arduino Libraries that are used in this projects:
 https://github.com/matthew-dickson-epic/TimeInterrupt
 */
+
+/*      Pin on DICE   Arduino Pins */
+#define DICE_PIN_20   2 // Blinker left side
+#define DICE_PIN_44   3 // Blinker right side
 #define DICE_PIN_1    4 // Driver door signal
 #define DICE_PIN_7    5 // Key is out
 #define DICE_PIN_19   6 // Rear window wiper
@@ -28,6 +33,12 @@ typedef enum {
 } states;
 
 bool has_autointerval_rearwindow = false;
+uint16_t debounce_time  = 500; // 500 ms
+uint16_t blinker_on_time = 1750; // 1750 ms
+uint16_t blinker_time_start = 0;
+uint16_t debounce = 0;
+bool blinker_left_on = false;
+bool blinker_right_on = false;
 
 volatile states state, old_state;
 
@@ -59,6 +70,22 @@ void loop() {
     has_autointerval_rearwindow = false;
   }
 
+  // Here read blinker botton
+  if( digitalRead(DICE_PIN_20) || digitalRead(DICE_PIN_44) )
+  {
+    delay(50);
+    if( blinker_right_on == false && digitalRead(DICE_PIN_44) )
+    {
+      state = BLINK_RIGHT;
+    } else if( blinker_left_on == false && digitalRead(DICE_PIN_20))
+    {
+      state = BLINK_LEFT;   
+    }
+  } else {
+    blinker_right_on = false;
+    blinker_left_on = false;
+  }
+
   switch( state )
   {
     case FOLLOW_ME_HOME:  
@@ -84,10 +111,73 @@ void loop() {
     break;
 
     case BLINK_RIGHT:
+      if( ( millis() - debounce ) > debounce_time )
+      {
+        if(blinker_left_on) // check if right blinker is on
+        {
+          blinker_left_on = false;
+          digitalWrite(DICE_PIN_44, LOW);
+          pinMode(DICE_PIN_44, INPUT);
+        } else { //
+          blinker_right_on = true;
+          pinMode(DICE_PIN_20, OUTPUT);
+          digitalWrite(DICE_PIN_20, HIGH);
+          blinker_time_start = millis();
+        }
+
+        debounce = millis();
+      }
     break;
 
     case BLINK_LEFT:
+      if( (millis() - debounce ) > debounce_time )
+      {
+        if(blinker_right_on)
+        {
+          blinker_right_on = false;
+          digitalWrite(DICE_PIN_20, LOW);
+          pinMode(DICE_PIN_20, INPUT);
+        } else {
+          blinker_left_on = true;
+          pinMode(DICE_PIN_44, OUTPUT);
+          digitalWrite(DICE_PIN_44, HIGH);
+          blinker_time_start = millis();
+        }
+        debounce = millis();
+      }
     break;
+  }
+
+  // Check if one of the blinkers is on
+  if( blinker_right_on || blinker_left_on )
+  {
+    // Checks for the time
+    if( millis() > ( blinker_time_start + blinker_on_time ) )
+    {
+      if( blinker_right_on )
+      {
+        blinker_right_on = false;
+        digitalWrite(DICE_PIN_20, LOW);
+        pinMode(DICE_PIN_20, INPUT);
+        if( digitalRead(DICE_PIN_20) )
+        {
+          state = BLINK_RIGHT;
+        } else {
+          state = NONE;
+        }
+      } else if( blinker_left_on ) 
+      {
+        blinker_left_on = false;
+        digitalWrite(DICE_PIN_44, LOW);
+        pinMode(DICE_PIN_44, INPUT);
+        if( digitalRead(DICE_PIN_44) )
+        {
+          state = BLINK_LEFT;  
+        } else {
+          state = NONE;
+        }
+      }
+    }
   }
 
   delay(200); // This is code is run every 200 ms
