@@ -8,13 +8,12 @@
  We will keep the original author's lane change (blink 3 times), but there will be a rewrite of it.
 
 ## What to implement
-* Follow me home light ( The DICE module should have the functionality )
-* Lane change ( Blink 3 times ) left and right
-* Autointerval rear window ( either as a fixed interval or as a set time from driver )
+- [ ] Follow me home light ( The DICE module should have the functionality )
+- [ ] Lane change ( Blink 3 times ) left and right
+- [ ] Autointerval rear window ( either as a fixed interval or as a set time from driver )
 
 ## Hardware
-Arduino, any could be used but we have choosen to use a Arduino Pro Micro.
-
-DICE from a SAAB 9-5, 9-3 this module should be compatiable.
+* Arduino, any could be used but we have choosen to use a Arduino Pro Micro.
+* DICE from a SAAB 9-5, 9-3 this module should be compatiable.
 
 This project is currently developed by Casper Hein Ankersen and Michael Torp Kaalund
