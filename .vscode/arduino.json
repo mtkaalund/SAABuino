@@ -1,5 +1,7 @@
 {
     "sketch": "SAABuino/SAABuino.ino",
     "board": "arduino:avr:pro",
-    "configuration": "cpu=16MHzatmega328"
+    "configuration": "cpu=16MHzatmega328",
+    "port": "/dev/ttyUSB0",
+    "programmer": "AVRISP mkII"
 }
