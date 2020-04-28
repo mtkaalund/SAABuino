@@ -27,6 +27,7 @@
 #define DICE_PIN_21   7 // Front window wiper
 #define DICE_PIN_41   8 // Close light
 
+// Bitfield hold for inputs
 typedef union {
   uint8_t value;
   struct {
