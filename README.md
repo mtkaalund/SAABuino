@@ -16,4 +16,16 @@
 * Arduino, any could be used but we have choosen to use a Arduino Pro Micro.
 * DICE from a SAAB 9-5, 9-3 this module should be compatiable.
 
+Following pins needed to be connected from the DICE module to the arduino.
+
+DICE pins   | Arduino pins  | Description
+------------|---------------|-------------------
+1           |  4            | Driver door signal
+7           |  5            | Key is out
+19          |  6            | Rear window wiper
+20          |  2            | Blinker left side
+21          |  7            | Front window wiper
+41          |  8            | Close light
+44          |  3            | Blinker right side
+
 This project is currently developed by Casper Hein Ankersen and Michael Torp Kaalund
