@@ -3,6 +3,8 @@
         {
             "name": "Linux",
             "includePath": [
+                "/home/kaalund/programs/arduino-1.8.12/tools/**",
+                "/home/kaalund/programs/arduino-1.8.12/hardware/arduino/avr/**",
                 "${workspaceFolder}/**",
                 "${HOME}/programs/arduino-1.8.12/libraries/**"
             ],
@@ -10,7 +12,10 @@
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "c11",
             "cppStandard": "c++17",
-            "intelliSenseMode": "gcc-x64"
+            "intelliSenseMode": "gcc-x64",
+            "forcedInclude": [
+                "/home/kaalund/programs/arduino-1.8.12/hardware/arduino/avr/cores/arduino/Arduino.h"
+            ]
         }
     ],
     "version": 4
