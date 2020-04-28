@@ -12,43 +12,38 @@
  * - Autointerval rear window
  * - Blink 3 times for lane change
 */
-
+#define TIMEBETWEEN 50
 #include "Timer.h"
 #include "DICE.h"
 
-// Our holding timer
-unsigned long count_time;
-unsigned long on_time = 100;
-
 bool led_on = false;
 
-void setup() {
-  // put your setup code here, to run once:
-  pinMode(LED_BUILTIN, OUTPUT);
-  Serial.begin(9600);
-  ReadDICEInput();
+void setup()
+{
+    // put your setup code here, to run once:
+    pinMode(LED_BUILTIN, OUTPUT);
+    Serial.begin(9600);
+    ReadDICEInput();
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-  if( ( millis() - count_time  ) > on_time )
-  {
-    internal_timer.add_100ms();    
-    count_time = millis();
-  }
-
-  // Read inputs every 200 ms
-  if( internal_timer.milisecond % 200 == 0 )
-  {
-    // Reading inputs
-    ReadDICEInput();
-    if( led_on )
+void loop()
+{
+    // put your main code here, to run repeatedly:
+    UpdateTime();
+    // Read inputs every 200 ms
+    if (internal_timer.milisecond % 200 == 0)
     {
-      digitalWrite(LED_BUILTIN, LOW);
-      led_on = false;
-    } else {
-      digitalWrite(LED_BUILTIN, HIGH);
-      led_on = true;
+        // Reading inputs
+        ReadDICEInput();
+        if (led_on)
+        {
+            digitalWrite(LED_BUILTIN, LOW);
+            led_on = false;
+        }
+        else
+        {
+            digitalWrite(LED_BUILTIN, HIGH);
+            led_on = true;
+        }
     }
-  }
 }
