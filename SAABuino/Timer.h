@@ -1,7 +1,24 @@
 #ifndef TIMER_H_
 #define TIMER_H_
+/*
+ * File: Timer.h
+ * Description:
+ * This file is a part of the SAABuino project
+ * This project is currently developed by Casper Hein Ankersen and Michael Torp Kaalund
+ * 
+ * The project got it is idea from https://hackaday.io/project/158595/gallery#c95bac70f561ae865c572f3897c6257d
+ * The idea is to add some more functionalty to our beloved SAABs.
+ * 
+ * As the original project have implmented blink 3 times, 
+ * in this project there are going to be implemented
+ * 
+ * - Follow Me Home Light
+ * - Autointerval rear window
+ * - Blink 3 times for lane change
+*/
 
-// time holder
+
+// Time holder
 struct Timer
 {
   uint16_t milisecond;
