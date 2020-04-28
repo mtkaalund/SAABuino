@@ -6,7 +6,7 @@
  * The idea is to add some more functionalty to our beloved SAABs.
  * 
  * As the original project have implmented blink 3 times, 
- * in this project there are going to be implemented
+ * in this project there are going TO be implemented
  * 
  * - Follow Me Home Light
  * - Autointerval rear window
@@ -30,6 +30,13 @@ void loop()
 {
     // put your main code here, to run repeatedly:
     UpdateTime();
+
+    if(internal_timer.second % 20 == 0 )
+    {
+        internal_timer.print_time();
+        print_input();      
+    }
+
     // Read inputs every 200 ms
     if (internal_timer.milisecond % 200 == 0)
     {
