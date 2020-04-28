@@ -12,4 +12,8 @@
 * Lane change ( Blink 3 times ) left and right
 * Autointerval rear window ( either as a fixed interval or as a set time from driver )
 
+## Hardware
+Arduino, any could be used but we have choosen to use a Arduino Pro Micro.
+DICE from a SAAB 9-5, 9-3 this module should be compatiable.
+
 This project is currently developed by Casper Hein Ankersen and Michael Torp Kaalund
