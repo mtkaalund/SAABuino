@@ -78,6 +78,15 @@ struct Timer
         }
     }
 
+    bool operator ==(const time_tm &b) const 
+    {
+        return time == b;
+    }
+    bool operator !=(const time_tm &b) const
+    {
+        return time != b;
+    }
+
     void print_time()
     {
         Serial.print("ms: ");
