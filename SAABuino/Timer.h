@@ -41,11 +41,8 @@ struct time_tm
         if(b.h != 0)
             b_return = (h == b.h);
         return b_return;
-        // if( ms == b.ms && s == b.s && m == b.m && h == b.h )
-        //     return true;
-        // else 
-        //     return false;
     }
+    
     bool operator !=(const time_tm &b) const
     {
         bool b_return = false;
@@ -58,10 +55,6 @@ struct time_tm
         if(b.h != 0)
             b_return = (h != b.h);
         return b_return;
-        // if( ms == b.ms && s == b.s && m == b.m && h == b.h )
-        //     return false;
-        // else 
-        //     return true;
     }
 };
 
