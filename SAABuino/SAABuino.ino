@@ -17,6 +17,8 @@
 #include "DICE.h"
 
 bool led_on = false;
+struct time_tm print_time;
+struct time_tm read_input_timer;
 
 void setup()
 {
@@ -24,6 +26,8 @@ void setup()
     pinMode(LED_BUILTIN, OUTPUT);
     Serial.begin(9600);
     ReadDICEInput();
+    read_input_timer.ms = 200;
+    print_time.s = 20;
 }
 
 void loop()
@@ -31,17 +35,10 @@ void loop()
     // put your main code here, to run repeatedly:
     UpdateTime();
 
-    if(internal_timer.time.s % 20 == 0 )
+    if(internal_timer == print_time)
     {
         internal_timer.print_time();
-        print_input();      
-    }
-
-    // Read inputs every 200 ms
-    if (internal_timer.time.ms % 200 == 0)
-    {
-        // Reading inputs
-        ReadDICEInput();
+        print_input();  
         if (led_on)
         {
             digitalWrite(LED_BUILTIN, LOW);
@@ -51,6 +48,13 @@ void loop()
         {
             digitalWrite(LED_BUILTIN, HIGH);
             led_on = true;
-        }
+        }    
+    }
+
+    // Read inputs every 200 ms
+    if (internal_timer == read_input_timer)
+    {
+        // Reading inputs
+        ReadDICEInput();
     }
 }
