@@ -31,14 +31,14 @@ void loop()
     // put your main code here, to run repeatedly:
     UpdateTime();
 
-    if(internal_timer.second % 20 == 0 )
+    if(internal_timer.time.s % 20 == 0 )
     {
         internal_timer.print_time();
         print_input();      
     }
 
     // Read inputs every 200 ms
-    if (internal_timer.milisecond % 200 == 0)
+    if (internal_timer.time.ms % 200 == 0)
     {
         // Reading inputs
         ReadDICEInput();
