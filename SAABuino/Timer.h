@@ -22,37 +22,57 @@
 #define TIMEBETWEEN 100
 #endif
 
+struct time_tm
+{
+    uint16_t ms;
+    uint8_t s;
+    uint8_t m;
+    uint8_t h;
+
+    bool operator ==(const time_tm &b) const 
+    {
+        if( ms == b.ms && s == b.s && m == b.m && h == b.h )
+            return true;
+        else 
+            return false;
+    }
+    bool operator !=(const time_tm &b) const
+    {
+        if( ms == b.ms && s == b.s && m == b.m && h == b.h )
+            return false;
+        else 
+            return true;
+    }
+};
+
 // Time holder
 struct Timer
 {
-    uint16_t milisecond;
-    uint8_t second;
-    uint8_t minute;
-    uint8_t hour;
+    struct time_tm time;
 
     Timer()
     {
-        milisecond = 0;
-        second = 0;
-        minute = 0;
-        hour = 0;
+        time.ms = 0;
+        time.s = 0;
+        time.m = 0;
+        time.h = 0;
     }
 
     void update()
     {
-        milisecond += TIMEBETWEEN;
-        if (milisecond >= 1000)
+        time.ms += TIMEBETWEEN;
+        if (time.ms >= 1000)
         {
-            milisecond -= 1000;
-            second += 1;
-            if (second >= 60)
+            time.ms -= 1000;
+            time.s += 1;
+            if (time.s >= 60)
             {
-                second -= 60;
-                minute += 1;
-                if (minute >= 60)
+                time.s -= 60;
+                time.m += 1;
+                if (time.m >= 60)
                 {
-                    minute -= 60;
-                    hour += 1;
+                    time.m -= 60;
+                    time.h += 1;
                 }
             }
         }
@@ -61,13 +81,13 @@ struct Timer
     void print_time()
     {
         Serial.print("ms: ");
-        Serial.println(milisecond);
+        Serial.println(time.ms);
         Serial.print("s: ");
-        Serial.println(second);
+        Serial.println(time.s);
         Serial.print("m: ");
-        Serial.println(minute);
+        Serial.println(time.m);
         Serial.print("h: ");
-        Serial.println(hour);
+        Serial.println(time.h);
     }
 };
 
