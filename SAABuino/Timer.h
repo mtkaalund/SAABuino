@@ -31,17 +31,37 @@ struct time_tm
 
     bool operator ==(const time_tm &b) const 
     {
-        if( ms == b.ms && s == b.s && m == b.m && h == b.h )
-            return true;
-        else 
-            return false;
+        bool b_return = false;
+        if(b.ms != 0)
+            b_return = (ms == b.ms);
+        if(b.s != 0)
+            b_return = (s == b.s);
+        if(b.m != 0)
+            b_return = (m == b.m);
+        if(b.h != 0)
+            b_return = (h == b.h);
+        return b_return;
+        // if( ms == b.ms && s == b.s && m == b.m && h == b.h )
+        //     return true;
+        // else 
+        //     return false;
     }
     bool operator !=(const time_tm &b) const
     {
-        if( ms == b.ms && s == b.s && m == b.m && h == b.h )
-            return false;
-        else 
-            return true;
+        bool b_return = false;
+        if(b.ms != 0)
+            b_return = (ms != b.ms);
+        if(b.s != 0)
+            b_return = (s != b.s);
+        if(b.m != 0)
+            b_return = (m != b.m);
+        if(b.h != 0)
+            b_return = (h != b.h);
+        return b_return;
+        // if( ms == b.ms && s == b.s && m == b.m && h == b.h )
+        //     return false;
+        // else 
+        //     return true;
     }
 };
 
