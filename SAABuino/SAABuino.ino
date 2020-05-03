@@ -15,10 +15,14 @@
 #define TIMEBETWEEN 50
 #include "Timer.h"
 #include "DICE.h"
+#include "Function.h"
 
 bool led_on = false;
 struct time_tm print_time;
 struct time_tm read_input_timer;
+
+// This is hold our functions
+Function * func_ptr[1];
 
 void setup()
 {
@@ -29,6 +33,7 @@ void setup()
     // Setting up our compare timers
     read_input_timer.ms = 200;
     print_time.s = 20;
+    func_ptr[0] = new TestFunc();
 }
 
 void loop()
@@ -50,6 +55,15 @@ void loop()
             digitalWrite(LED_BUILTIN, HIGH);
             led_on = true;
         }    
+    }
+
+    // Here we check all functions in func_ptr
+    for(auto ptr : func_ptr )
+    {
+        if(internal_timer == ptr->run_time)
+        {
+            ptr->update();
+        }
     }
 
     // Read inputs every 200 ms
