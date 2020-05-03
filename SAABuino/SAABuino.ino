@@ -26,6 +26,7 @@ void setup()
     pinMode(LED_BUILTIN, OUTPUT);
     Serial.begin(9600);
     ReadDICEInput();
+    // Setting up our compare timers
     read_input_timer.ms = 200;
     print_time.s = 20;
 }
