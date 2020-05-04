@@ -16,6 +16,7 @@ public:
         run_time.h = 0;
     }
 
+    virtual void update();
     virtual void run();
 };
 
