@@ -119,7 +119,7 @@ struct Timer
     {
         return time != b;
     }
-
+#ifdef DEBUG_PRINT
     void print_time()
     {
         Serial.print("ms: ");
@@ -131,6 +131,7 @@ struct Timer
         Serial.print("h: ");
         Serial.println(time.h);
     }
+#endif
 };
 
 Timer internal_timer;
