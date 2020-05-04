@@ -21,9 +21,9 @@
 #include "FollowMeHome.h"
 #include "AutoIntervalRearWiper.h"
 
-bool led_on = false;
 #ifdef DEBUG_PRINT
 struct time_tm print_time;
+bool led_on = false;
 #endif
 struct time_tm read_input_timer;
 
@@ -33,8 +33,12 @@ Function * func_ptr[2];
 void setup()
 {
     // put your setup code here, to run once:
+#ifdef DEBUG_PRINT
+    print_time.s = 20;
     pinMode(LED_BUILTIN, OUTPUT);
     Serial.begin(9600);
+#endif
+
     ReadDICEInput();
     // Setting up our compare timers
     read_input_timer.ms = 200;
@@ -42,9 +46,6 @@ void setup()
     // Adding our functions to func_ptr
     func_ptr[0] = new FollowMeHome();
     func_ptr[1] = new AutoIntervalRearWiper();
-#ifdef DEBUG_PRINT
-    print_time.s = 20;
-#endif
 }
 
 void loop()
