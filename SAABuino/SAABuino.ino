@@ -32,9 +32,9 @@ Function * func_ptr[2];
 
 void setup()
 {
+    pinMode(LED_BUILTIN, OUTPUT);
 #ifdef DEBUG_PRINT
     print_time.s = 20;
-    pinMode(LED_BUILTIN, OUTPUT);
     Serial.begin(9600);
 #endif
 
