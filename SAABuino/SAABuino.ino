@@ -32,7 +32,6 @@ Function * func_ptr[2];
 
 void setup()
 {
-    // put your setup code here, to run once:
 #ifdef DEBUG_PRINT
     print_time.s = 20;
     pinMode(LED_BUILTIN, OUTPUT);
