@@ -20,50 +20,60 @@ public:
         // In this function, this the run_time will be set by user
     }
 
+    void reset()
+    {
+        RearWiperOnFirstTime = false;
+        RearWiperOff = false;
+        RunConditions = false;
+    }
+
     void update() override
     {
-        // If the front wiper is on.
-        if (inputs.bits.front_wiper == 1)
+        if (inputs.bits.key_is_out == 0)
         {
-            // If the rear wiper is on
-            if (inputs.bits.rear_wiper == 1)
+            // If the front wiper is on.
+            if (inputs.bits.front_wiper == 1)
             {
-                // If this is the first time it has been activated
-                if (RearWiperOnFirstTime == false)
+                // If the rear wiper is on
+                if (inputs.bits.rear_wiper == 1)
                 {
-                    RearWiperOnFirstTime = true;
-                    first_activated = internal_timer.time;
+                    // If this is the first time it has been activated
+                    if (RearWiperOnFirstTime == false)
+                    {
+                        RearWiperOnFirstTime = true;
+                        first_activated = internal_timer.time;
+                    }
+                    else
+                    {
+                        if (RearWiperOff == true)
+                        {
+                            // Setting the time
+                            run_time = internal_timer.time - first_activated;
+                            RunConditions = true;
+                        }
+                    }
                 }
                 else
                 {
-                    if (RearWiperOff == true)
+                    if (RearWiperOnFirstTime == true && RearWiperOff == false)
                     {
-                        // Setting the time
-                        run_time = internal_timer.time - first_activated;
-                        RunConditions = true;
+                        RearWiperOff = true;
+                    }
+                    else
+                    {
+                        // Reset
+                        reset();
                     }
                 }
             }
-            else
-            {
-                if (RearWiperOnFirstTime == true && RearWiperOff == false)
-                {
-                    RearWiperOff = true;
-                }
-                else
-                {
-                    // Reset
-                    RearWiperOnFirstTime = false;
-                    RearWiperOff = false;
-                    RunConditions = false;
-                }
-            }
+        } else {
+            reset();
         }
     }
 
     void run() override
     {
-        if( RunConditions == true )
+        if (RunConditions == true)
         {
             pinMode(DICE_PIN_19, OUTPUT);
             digitalWrite(DICE_PIN_19, HIGH);
