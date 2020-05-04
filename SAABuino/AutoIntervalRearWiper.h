@@ -12,7 +12,7 @@ private:
     bool RearWiperOnFirstTime = false;
     bool RearWiperOff = false;
 
-    struct timer_tm first_activated;
+    struct time_tm first_activated;
 
 public:
     AutoIntervalRearWiper()
