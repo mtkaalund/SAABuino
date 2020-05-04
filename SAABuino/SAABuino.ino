@@ -17,14 +17,14 @@
 #include "DICE.h"
 #include "Function.h"
 #include "FollowMeHome.h"
-
+#include "AutoIntervalRearWiper.h"
 
 bool led_on = false;
 struct time_tm print_time;
 struct time_tm read_input_timer;
 
 // This is hold our functions
-Function * func_ptr[1];
+Function * func_ptr[2];
 
 void setup()
 {
@@ -36,6 +36,7 @@ void setup()
     read_input_timer.ms = 200;
     print_time.s = 20;
     func_ptr[0] = new FollowMeHome();
+    func_ptr[1] = new AutoIntervalRearWiper();
 }
 
 void loop()
