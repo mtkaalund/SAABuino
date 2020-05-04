@@ -70,7 +70,7 @@ void loop()
     }
 
     // Read inputs every 200 ms
-    if (internal_timer == read_input_timer)
+    if (internal_timer.time.ms % read_input_timer.ms == 0)
     {
         // Reading inputs
         ReadDICEInput();
