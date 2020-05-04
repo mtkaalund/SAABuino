@@ -64,7 +64,6 @@ void loop()
     {
         if(internal_timer == ptr->run_time)
         {
-            ptr->update();
             ptr->run();
         }
     }
@@ -74,5 +73,10 @@ void loop()
     {
         // Reading inputs
         ReadDICEInput();
+
+        for( auto ptr : func_ptr )
+        {
+            ptr->update();
+        }
     }
 }
