@@ -42,7 +42,6 @@ typedef union {
   } bits;
 } dice_key;
 
-
 dice_key inputs;
 
 void ReadDICEInput()
