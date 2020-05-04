@@ -29,32 +29,52 @@ struct time_tm
     uint8_t m;
     uint8_t h;
 
-    bool operator ==(const time_tm &b) const 
+    bool operator==(const time_tm &b) const
     {
         bool b_return = false;
-        if(b.ms != 0)
+        if (b.ms != 0)
             b_return = (ms == b.ms);
-        if(b.s != 0)
+        if (b.s != 0)
             b_return = (s == b.s);
-        if(b.m != 0)
+        if (b.m != 0)
             b_return = (m == b.m);
-        if(b.h != 0)
+        if (b.h != 0)
             b_return = (h == b.h);
         return b_return;
     }
-    
-    bool operator !=(const time_tm &b) const
+
+    bool operator!=(const time_tm &b) const
     {
         bool b_return = false;
-        if(b.ms != 0)
+        if (b.ms != 0)
             b_return = (ms != b.ms);
-        if(b.s != 0)
+        if (b.s != 0)
             b_return = (s != b.s);
-        if(b.m != 0)
+        if (b.m != 0)
             b_return = (m != b.m);
-        if(b.h != 0)
+        if (b.h != 0)
             b_return = (h != b.h);
         return b_return;
+    }
+
+    time_tm operator+(const time_tm &b) const
+    {
+        time_tm tmp;
+        tmp.ms = ms + b.ms;
+        tmp.s = s + b.s;
+        tmp.m = m + b.m;
+        tmp.h = h + b.h;
+        return tmp;
+    }
+
+    time_tm operator-(const time_tm &b) const
+    {
+        time_tm tmp;
+        tmp.ms = ms - b.ms;
+        tmp.s = s - b.s;
+        tmp.m = m - b.m;
+        tmp.h = h - b.h;
+        return tmp;
     }
 };
 
@@ -91,11 +111,11 @@ struct Timer
         }
     }
 
-    bool operator ==(const time_tm &b) const 
+    bool operator==(const time_tm &b) const
     {
         return time == b;
     }
-    bool operator !=(const time_tm &b) const
+    bool operator!=(const time_tm &b) const
     {
         return time != b;
     }
