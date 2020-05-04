@@ -18,6 +18,9 @@
 */
 #include <avr/sleep.h>
 
+void WakeSAAB();
+void SleepSAAB();
+
 /*      Pin on DICE   Arduino Pins */
 #define DICE_PIN_20   5 // Blinker left side
 #define DICE_PIN_44   3 // Blinker right side
