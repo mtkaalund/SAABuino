@@ -76,6 +76,13 @@ struct time_tm
         tmp.h = h - b.h;
         return tmp;
     }
+
+    // bool operator%(const time_tm &b) const
+    // {
+    //     return (
+    //         ms % b.ms == 0 ||
+    //     );
+    // }
 };
 
 // Time holder
