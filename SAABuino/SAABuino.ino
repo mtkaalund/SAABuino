@@ -12,6 +12,8 @@
  * - Autointerval rear window
  * - Blink 3 times for lane change
 */
+//#define DEBUG_PRINT
+
 #define TIMEBETWEEN 50
 #include "Timer.h"
 #include "DICE.h"
@@ -20,7 +22,9 @@
 #include "AutoIntervalRearWiper.h"
 
 bool led_on = false;
+#ifdef DEBUG_PRINT
 struct time_tm print_time;
+#endif
 struct time_tm read_input_timer;
 
 // This is hold our functions
@@ -34,16 +38,20 @@ void setup()
     ReadDICEInput();
     // Setting up our compare timers
     read_input_timer.ms = 200;
-    print_time.s = 20;
+
+    // Adding our functions to func_ptr
     func_ptr[0] = new FollowMeHome();
     func_ptr[1] = new AutoIntervalRearWiper();
+#ifdef DEBUG_PRINT
+    print_time.s = 20;
+#endif
 }
 
 void loop()
 {
-    // put your main code here, to run repeatedly:
+    // Update main timer.
     UpdateTime();
-
+#ifdef DEBUG_PRINT
     if(internal_timer == print_time)
     {
         internal_timer.print_time();
@@ -59,7 +67,7 @@ void loop()
             led_on = true;
         }    
     }
-
+#endif
     // Here we check all functions in func_ptr
     for( auto ptr : func_ptr )
     {
@@ -74,7 +82,7 @@ void loop()
     {
         // Reading inputs
         ReadDICEInput();
-
+        // Update all func_ptr
         for( auto ptr : func_ptr )
         {
             ptr->update();
