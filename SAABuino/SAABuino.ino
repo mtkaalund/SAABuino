@@ -16,6 +16,8 @@
 #include "Timer.h"
 #include "DICE.h"
 #include "Function.h"
+#include "FollowMeHome.h"
+
 
 bool led_on = false;
 struct time_tm print_time;
@@ -33,7 +35,7 @@ void setup()
     // Setting up our compare timers
     read_input_timer.ms = 200;
     print_time.s = 20;
-    func_ptr[0] = new TestFunc();
+    func_ptr[0] = new FollowMeHome();
 }
 
 void loop()
@@ -58,11 +60,12 @@ void loop()
     }
 
     // Here we check all functions in func_ptr
-    for(auto ptr : func_ptr )
+    for( auto ptr : func_ptr )
     {
         if(internal_timer == ptr->run_time)
         {
             ptr->update();
+            ptr->run();
         }
     }
 
