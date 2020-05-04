@@ -7,11 +7,22 @@
 
  We will keep the original author's lane change (blink 3 times), but there will be a rewrite of it.
 
+## Functionality implemented
+When some of the functionality is implemented, the description of how it works should be here.
+
+# Autointerval rear wiper
+I had a problem, when driving in the rain my rear window would be needing to be wiped ever so offen.
+So if the front wiper is activated, then when the rear wiper is activated. A timestamp is saved, then deactivate the rear wiper. When you need to wipe the rear window again, then activate it again, run for a full cycle and deactivate it again. This will set the timer for it to activated, so for as long the front wiper is on, then it will activate the rear wiper.
+
+# Follow me home
+This is a function that should already be in your SAAB. So take your key out and open the drivers door.
+It will activate the head lights and the DICE should keep the lights on for 20 - 50 seconds (This is reprogrammable with the TECH2 SAAB tool).
+
 ## What to implement
 - [x] Timer based function code
 - [x] Follow me home light ( The DICE module should have the functionality )
 - [ ] Lane change ( Blink 3 times ) left and right
-- [x] Autointerval rear window ( either as a fixed interval or as a set time from driver )
+- [x] Autointerval rear wiper ( either as a fixed interval or as a set time from driver )
 
 ## Hardware
 * Arduino, any could be used but we have choosen to use a Arduino Pro Micro.
