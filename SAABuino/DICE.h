@@ -19,10 +19,10 @@
 
 
 /*      Pin on DICE   Arduino Pins */
-#define DICE_PIN_20   2 // Blinker left side
+#define DICE_PIN_20   5 // Blinker left side
 #define DICE_PIN_44   3 // Blinker right side
 #define DICE_PIN_1    4 // Driver door signal
-#define DICE_PIN_7    5 // Key is out
+#define DICE_PIN_7    2 // Key is out
 #define DICE_PIN_19   6 // Rear window wiper
 #define DICE_PIN_21   7 // Front window wiper
 #define DICE_PIN_41   8 // Close light
