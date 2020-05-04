@@ -16,7 +16,7 @@
  * - Autointerval rear window
  * - Blink 3 times for lane change
 */
-
+#include <avr/sleep.h>
 
 /*      Pin on DICE   Arduino Pins */
 #define DICE_PIN_20   5 // Blinker left side
@@ -99,6 +99,24 @@ void ReadDICEInput()
   } else {
     inputs.bits.key_is_out = 0;
   }
+}
+
+// Here is our sleep and wake up functions.
+void SleepSAAB()
+{
+  sleep_enable();                        // Enable sleep mode
+  pinMode(DICE_PIN_7, INPUT);            // Setting DICE_PIN_7 to input
+  attachInterrupt(0, WakeSAAB, HIGH);    // attachInterrupt an interrupt to DICE pin 7 or Arduino pin 2
+  set_sleep_mode( SLEEP_MODE_PWR_DOWN ); // Full sleep
+  digitalWrite(LED_BUILTIN, LOW);        // Turn off buildin led
+  sleep_cpu();                           // Activate sleep mode.
+  digitalWrite(LED_BUILTIN, HIGH);       // Turn on buildin led
+}
+
+void WakeSAAB()
+{
+  sleep_disable();                        // Disable sleep mode
+  detachInterrupt(0);                     // remove interrupt from Arduino pin 2
 }
 
 #endif
