@@ -36,6 +36,7 @@ public:
             digitalWrite(DICE_PIN_41, LOW); // Setting DICE pin 41 to low
             pinMode(DICE_PIN_41, INPUT);    // Returning it to input
             RunConditions = false;          // RunConditions returned to false
+            SleepSAAB();                    // Putting our board to sleep
         }
     }
 };
