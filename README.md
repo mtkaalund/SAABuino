@@ -23,6 +23,7 @@ It will activate the head lights and the DICE should keep the lights on for 20 -
 - [x] Follow me home light ( The DICE module should have the functionality )
 - [ ] Lane change ( Blink 3 times ) left and right
 - [x] Autointerval rear wiper ( either as a fixed interval or as a set time from driver )
+- [ ] Sleeping when the key is out, and wake up when the key is inserted
 
 ## Hardware
 * Arduino, any could be used but we have choosen to use a Arduino Pro Micro.
