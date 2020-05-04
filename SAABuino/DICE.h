@@ -101,11 +101,4 @@ void ReadDICEInput()
   }
 }
 
-void print_input()
-{
-  Serial.print("inputs: 0x");
-  Serial.print(inputs.value, BIN);
-  Serial.println("");
-}
-
 #endif
